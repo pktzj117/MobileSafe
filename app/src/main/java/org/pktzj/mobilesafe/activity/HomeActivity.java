@@ -1,17 +1,30 @@
 package org.pktzj.mobilesafe.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.pktzj.mobilesafe.R;
+import org.pktzj.mobilesafe.utils.MD5Utils;
+import org.pktzj.mobilesafe.utils.MyConstants;
+import org.pktzj.mobilesafe.utils.SPTool;
 
 public class HomeActivity extends Activity {
+    private static final String TAG = "HomeActivity";
     private GridView gv_menus_home;
 
     private int icons[] = {
@@ -37,8 +50,6 @@ public class HomeActivity extends Activity {
             "设置中心",
     };
 
-    private MyAdapter adapter;//GridView的适配器
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +58,9 @@ public class HomeActivity extends Activity {
     }
 
     private void initDate() {
-        adapter = new MyAdapter();
+        MyAdapter adapter = new MyAdapter();
         gv_menus_home.setAdapter(adapter);
+        gv_menus_home.setOnItemClickListener(new MyOnClickListener());
     }
 
     private void initView() {
@@ -56,7 +68,7 @@ public class HomeActivity extends Activity {
         gv_menus_home = (GridView) findViewById(R.id.gv_menus_home);
     }
 
-    private class MyAdapter extends BaseAdapter{
+    private class MyAdapter extends BaseAdapter {
         @Override
         public int getCount() {
             return icons.length;
@@ -84,5 +96,119 @@ public class HomeActivity extends Activity {
 
             return view;
         }
+    }
+
+    private class MyOnClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            switch (names[position]) {
+                case "手机防盗":
+                    String password = SPTool.getSring(getApplicationContext(), MyConstants.PASSWORD , "");
+                    if (TextUtils.isEmpty(password)) {
+                        MySetPassDialog();
+                    } else {
+                        MyEnterPassDialog(password);
+                    }
+                    break;
+                case "通讯卫士":
+                    break;
+                case "软件管家":
+                    break;
+                case "进程管理":
+                    break;
+                case "流量统计":
+                    break;
+                case "病毒查杀":
+                    break;
+                case "缓存清除":
+                    break;
+                case "高级工具":
+                    break;
+                case "设置中心":
+                    break;
+            }
+        }
+    }
+
+    private void MyEnterPassDialog(final String pd) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = View.inflate(this, R.layout.dialog_enter_password, null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        final EditText et_password = (EditText) view.findViewById(R.id.et_password);
+        final Button bt_enter_enterpassword = (Button) view.findViewById(R.id.bt_enter_enterpass);
+        final Button bt_cancel_enterpassword = (Button) view.findViewById(R.id.bt_cancel_enterpass);
+        bt_enter_enterpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //确定比对密码
+                String enterpassword = et_password.getText().toString();
+
+                if (TextUtils.isEmpty(enterpassword) || enterpassword.equals(pd)) {
+                    Toast.makeText(getApplicationContext(), "输入密码为空!", Toast.LENGTH_SHORT).show();
+                    et_password.setText("");
+                } else {
+                    //保存密码
+                    String password = MD5Utils.md5(MD5Utils.md5(enterpassword));
+                    if (password.equals(pd)) {
+                        dialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "登录成功!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "密码错误!", Toast.LENGTH_SHORT).show();
+                        et_password.setText("");
+                    }
+                }
+            }
+        });
+        bt_cancel_enterpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void MySetPassDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = View.inflate(this, R.layout.dialog_set_password, null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        final EditText et_passwordone = (EditText) view.findViewById(R.id.et_passwordone);
+        final EditText et_passwordtwo = (EditText) view.findViewById(R.id.et_passwordtwo);
+        final Button bt_enter_setpassword = (Button) view.findViewById(R.id.bt_enter_setpass);
+        final Button bt_cancel_setpassword = (Button) view.findViewById(R.id.bt_cancel_setpass);
+        bt_enter_setpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //确定比对密码
+                String passwordone = et_passwordone.getText().toString();
+                String passwordtwo = et_passwordtwo.getText().toString();
+                if (TextUtils.isEmpty(passwordone) || TextUtils.isEmpty(passwordtwo)) {
+                    Toast.makeText(getApplicationContext(), "输入密码不能为空!", Toast.LENGTH_SHORT).show();
+                } else if (!passwordone.equals(passwordtwo)) {
+                    Toast.makeText(getApplicationContext(), "两次输入密码不一致!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "密码设置成功!", Toast.LENGTH_SHORT).show();
+                    //保存密码
+                    String password = MD5Utils.md5(MD5Utils.md5(passwordone));
+                    Log.d(TAG, "password: " + password);
+                    SPTool.putSring(getApplicationContext(), MyConstants.PASSWORD, password);
+                    dialog.dismiss();
+                }
+            }
+        });
+        bt_cancel_setpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }
