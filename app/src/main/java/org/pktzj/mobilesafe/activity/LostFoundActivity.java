@@ -28,6 +28,6 @@ public class LostFoundActivity extends Activity {
     }
 
     private void initView() {
-        setContentView(R.layout.activity_lostfound);
+        setContentView(R.layout.activity_setup2);
     }
 }

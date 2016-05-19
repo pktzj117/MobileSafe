@@ -3,6 +3,7 @@ package org.pktzj.mobilesafe.activity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -154,6 +155,7 @@ public class HomeActivity extends Activity {
                     if (password.equals(pd)) {
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "登录成功!", Toast.LENGTH_SHORT).show();
+                        loadlostfoud();
                     } else {
                         Toast.makeText(getApplicationContext(), "密码错误!", Toast.LENGTH_SHORT).show();
                         et_password.setText("");
@@ -170,6 +172,11 @@ public class HomeActivity extends Activity {
 
         dialog.show();
 
+    }
+
+    private void loadlostfoud() {
+        Intent intent = new Intent(HomeActivity.this, LostFoundActivity.class);
+        startActivity(intent);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
