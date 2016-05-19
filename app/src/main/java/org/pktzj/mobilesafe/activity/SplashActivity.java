@@ -92,6 +92,21 @@ public class SplashActivity extends Activity {
                     loadMain();
                     break;
                 case ERROR:
+                    switch (ERROR) {
+                        case 404:
+                            Toast.makeText(getApplicationContext(), "404 not found!", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 4001:
+                            Toast.makeText(getApplicationContext(), "错误4001", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 4002:
+                            Toast.makeText(getApplicationContext(), "错误4002 json", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(getApplicationContext(),"一般错误",Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                    loadMain();
                     break;
                 case SHOWUPDATEDIALOG://显示更新版本的对话框
                     showUpdateDialog();
@@ -147,25 +162,27 @@ public class SplashActivity extends Activity {
         //文件下载地址
         String url = parseJson.getUrl();
         //文件保存在本地的路径
-        final String filepath = Environment.getExternalStorageDirectory() +  url.substring(url.lastIndexOf("/"));
+        final String filepath = Environment.getExternalStorageDirectory() + url.substring(url.lastIndexOf("/"));
         XUtil.DownLoadFile(url, filepath, new MyProgressCallBack<File>() {
 
             @Override
             public void onSuccess(File result) {
                 super.onSuccess(result);
                 Log.d(TAG, "onSuccess");
-                Toast.makeText(getApplicationContext(),"下载成功!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "下载成功!", Toast.LENGTH_SHORT).show();
                 //安装apk
                 installAPK(filepath);
+                pb_download.setVisibility(View.GONE);
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 super.onError(ex, isOnCallback);
                 Log.d(TAG, ex.toString());
-                Toast.makeText(getApplicationContext(),"下载失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "下载失败!", Toast.LENGTH_SHORT).show();
                 //载入home界面
                 loadMain();
+                pb_download.setVisibility(View.GONE);
             }
 
             @Override
@@ -228,7 +245,6 @@ public class SplashActivity extends Activity {
 
         }
     }
-
 
 
     private void checkVersion() {

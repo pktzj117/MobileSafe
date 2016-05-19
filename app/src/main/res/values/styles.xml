@@ -10,5 +10,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="tv_title">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">65dip</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">#ff000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">#7700ff00</item>
 
+    </style>
 </resources>
