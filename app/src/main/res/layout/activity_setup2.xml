@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="5dp">
+    android:orientation="vertical">
 
     <TextView
         style="@style/tv_title"
@@ -12,6 +11,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:text="通过绑定SIM卡"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -19,19 +20,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:gravity="center_vertical"
         android:text="SIM卡变更报警"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
-
     <Button
-        android:id="@+id/bt_setup2_bindsim"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-
+        android:id="@+id/bt_bindsim_setup2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/bt_selector"
-        android:drawableEnd="@drawable/lock"
+        android:onClick="changebindsim"
         android:text="点击绑定/解绑sim卡" />
 
 
@@ -64,7 +67,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
 
         <ImageView
             android:layout_width="wrap_content"

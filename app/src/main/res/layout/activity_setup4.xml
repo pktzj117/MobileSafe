@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     android:orientation="vertical">
 
     <TextView
@@ -10,6 +9,8 @@
         android:text="4.恭喜您设置完成" />
 
     <CheckBox
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:id="@+id/cb_isprotected_setup4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +18,8 @@
         android:textSize="20sp" />
 
     <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:textColor="@android:color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,13 +27,6 @@
         android:text="防盗保护已经开启"
         android:textSize="20sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@android:drawable/btn_star_big_on"
-        android:gravity="center_vertical"
-        android:text="GPS追踪"
-        android:textSize="20sp" />
 
 
     <LinearLayout
@@ -56,6 +52,8 @@
             android:layout_height="20dp"/>
     </LinearLayout>
     <RelativeLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView

@@ -1,6 +1,7 @@
 package org.pktzj.mobilesafe.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import org.pktzj.mobilesafe.R;
@@ -23,11 +24,13 @@ public class LostFoundActivity extends Activity {
         if (issetup) {
 
         } else {
-
+            Intent intent = new Intent(this, Setup1Activity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
     private void initView() {
-        setContentView(R.layout.activity_setup2);
+        setContentView(R.layout.activity_lostfound);
     }
 }

@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     android:orientation="vertical">
 
     <TextView
@@ -10,6 +9,10 @@
         android:text="3.设置安全号码" />
 
     <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SIM卡变更报警:"
@@ -17,6 +20,8 @@
         android:textSize="18sp" />
 
     <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -25,6 +30,11 @@
         android:textSize="18sp" />
 
     <EditText
+        android:id="@+id/et_safenum_setup3"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="输入安全号码"
@@ -35,6 +45,9 @@
         android:textSize="20sp" />
 
     <Button
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:onClick="setsafenum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -66,6 +79,8 @@
             android:layout_height="20dp"/>
     </LinearLayout>
     <RelativeLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
