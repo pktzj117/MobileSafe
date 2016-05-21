@@ -6,7 +6,9 @@ import android.util.Log;
 
 import org.pktzj.mobilesafe.domain.ContactBean;
 import org.pktzj.mobilesafe.engine.readContactEngine;
+import org.pktzj.mobilesafe.service.LostFindService;
 import org.pktzj.mobilesafe.utils.MyConstants;
+import org.pktzj.mobilesafe.utils.ServiceUtils;
 
 import java.util.List;
 
@@ -28,4 +30,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         }
     }
 
+    public void testService() {
+        boolean b = ServiceUtils.serviceIsRunning(getContext(), LostFindService.class);
+    }
 }

@@ -18,12 +18,15 @@ public abstract class BaseSetupActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //初始化控件
         initView();
-
+        //初始化手势
         initGestyres();
-
-        initEvet();
+        //初始化数据
         initData();
+        //初始化事件
+        initEvet();
+
     }
 
     @Override

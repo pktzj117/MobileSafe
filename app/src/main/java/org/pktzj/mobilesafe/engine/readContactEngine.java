@@ -3,10 +3,8 @@ package org.pktzj.mobilesafe.engine;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 
 import org.pktzj.mobilesafe.domain.ContactBean;
-import org.pktzj.mobilesafe.utils.MyConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,17 +27,17 @@ public class readContactEngine {
             ContactBean contact = new ContactBean();
             String id = id_cursor.getString(id_cursor.getColumnIndex("_id"));
             Cursor cursor = context.getContentResolver().query(uriDatas, new String[]{"data1", "mimetype"},
-                    "WHERE raw_contact_id=?", new String[]{id}, null);
+                    "raw_contact_id=?", new String[]{id}, null);
             while (cursor.moveToNext()) {
                 String data1 = cursor.getString(cursor.getColumnIndex("data1"));
                 String mimetype = cursor.getString(cursor.getColumnIndex("mimetype"));
 
 
                 if (mimetype.equals("vnd.android.cursor.item/name")) {
-                    Log.d(MyConstants.TAG,"第" +id + "个用户：名字：" + data1);
+                   // Log.d(MyConstants.TAG,"第" +id + "个用户：名字：" + data1);
                     contact.setName(data1);
                 } else if (mimetype.equals("vnd.android.cursor.item/phone_v2")) {
-                    Log.d(MyConstants.TAG,"第" +id + "个用户：电话：" + data1);
+                    //Log.d(MyConstants.TAG,"第" +id + "个用户：电话：" + data1);
                     contact.setNumber(data1);
                 }
             }

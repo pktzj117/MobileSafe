@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.pktzj.mobilesafe.R;
+import org.pktzj.mobilesafe.service.LostFindService;
 import org.pktzj.mobilesafe.utils.MD5Utils;
 import org.pktzj.mobilesafe.utils.MyConstants;
 import org.pktzj.mobilesafe.utils.SPTool;
@@ -56,12 +57,20 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         initView();
         initDate();
+        initEvent();
     }
 
-    private void initDate() {
+    private void initEvent() {
         MyAdapter adapter = new MyAdapter();
         gv_menus_home.setAdapter(adapter);
         gv_menus_home.setOnItemClickListener(new MyOnClickListener());
+    }
+
+    private void initDate() {
+        if (SPTool.getboolean(HomeActivity.this, MyConstants.ISSETUP, false)) {
+            Intent service = new Intent(HomeActivity.this, LostFindService.class);
+            startService(service);
+        }
     }
 
     private void initView() {
@@ -175,7 +184,7 @@ public class HomeActivity extends Activity {
     }
 
     private void loadlostfoud() {
-        Intent intent = new Intent(HomeActivity.this, LostFoundActivity.class);
+        Intent intent = new Intent(HomeActivity.this, LostFindActivity.class);
         startActivity(intent);
     }
 

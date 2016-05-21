@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.pktzj.mobilesafe"
-    >
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    package="org.pktzj.mobilesafe">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
     <application
         android:name=".utils.MyApplication"
         android:allowBackup="true"
@@ -22,12 +26,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomeActivity"></activity>
-        <activity android:name=".activity.LostFoundActivity"></activity>
-        <activity android:name=".activity.Setup1Activity"></activity>
-        <activity android:name=".activity.Setup2Activity"></activity>
-        <activity android:name=".activity.Setup3Activity"></activity>
-        <activity android:name=".activity.Setup4Activity"></activity>
+        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.LostFindActivity" />
+        <activity android:name=".activity.Setup1Activity" />
+        <activity android:name=".activity.Setup2Activity" />
+        <activity android:name=".activity.Setup3Activity" />
+        <activity android:name=".activity.Setup4Activity" />
+        <activity android:name=".activity.ContactsActivity" />
+
+        <service
+            android:name=".service.LostFindService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

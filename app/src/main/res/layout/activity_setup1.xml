@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="您的手机防盗卫士"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:layout_marginLeft="5dp"
@@ -26,7 +26,7 @@
         android:gravity="center_vertical"
         android:text="SIM卡变更报警"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_marginLeft="5dp"
@@ -37,7 +37,7 @@
         android:gravity="center_vertical"
         android:text="GPS追踪"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_marginLeft="5dp"
@@ -48,7 +48,7 @@
         android:gravity="center_vertical"
         android:text="远程锁屏"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_marginLeft="5dp"
@@ -59,7 +59,7 @@
         android:gravity="center_vertical"
         android:text="清除远程数据"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
     <LinearLayout
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"

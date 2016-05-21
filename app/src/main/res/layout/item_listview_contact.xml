@@ -5,9 +5,10 @@
     android:orientation="horizontal">
 
     <TextView
+        android:id="@+id/tv_name_contacts"
         android:text="姓名"
         android:textColor="@android:color/holo_blue_light"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:layout_width="0dp"
         android:gravity="center"
         android:layout_height="wrap_content"
@@ -15,8 +16,9 @@
 
     <TextView
         android:text="电话号码"
+        android:id="@+id/tv_num_contacts"
         android:textColor="@android:color/holo_blue_light"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -10,4 +10,5 @@ public interface MyConstants {
     String ISSETUP = "issetup";//是否进入过设置向导界面
     String SIMNUM = "SimSerialNumber";//绑定的本机sim卡
     String SAFENUM = "safenum";//发送信息的安全号码
+    int CONTACTSQCODE = 100;
 }

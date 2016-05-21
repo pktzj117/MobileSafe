@@ -15,8 +15,8 @@
         android:layout_height="wrap_content">
         <TextView
             android:text="姓名"
-            android:textColor="@android:color/holo_green_light"
-            android:textSize="22sp"
+            android:textColor="@color/colorAccent"
+            android:textSize="26sp"
             android:layout_width="0dp"
             android:gravity="center"
             android:layout_height="wrap_content"
@@ -24,8 +24,8 @@
 
         <TextView
             android:text="电话号码"
-            android:textColor="@android:color/holo_green_light"
-            android:textSize="22sp"
+            android:textColor="@color/colorAccent"
+            android:textSize="26sp"
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

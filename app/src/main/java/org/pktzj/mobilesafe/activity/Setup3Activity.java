@@ -1,5 +1,6 @@
 package org.pktzj.mobilesafe.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +32,19 @@ public class Setup3Activity extends BaseSetupActivity {
     }
 
     public void setsafenum(View view) {
+        Intent intent = new Intent(this, ContactsActivity.class);
+        startActivityForResult(intent,MyConstants.CONTACTSQCODE);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {//用户选择数据来关闭联系人界面,而不是直接点击返回按钮
+            //获取数据
+            String phone = data.getStringExtra(MyConstants.SAFENUM);
+            //显示安全号码
+            et_safenum.setText(phone);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
