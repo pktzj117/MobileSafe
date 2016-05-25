@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MobileSafe</string>
+
+    <string name="activity_sample_device_admin">锁屏管理器</string>
+    <string name="sample_device_admin">锁屏管理器</string>
+    <string name="sample_device_admin_description">锁屏管理器</string>
 </resources>

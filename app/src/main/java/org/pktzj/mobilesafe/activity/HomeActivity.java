@@ -112,8 +112,8 @@ public class HomeActivity extends Activity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            switch (names[position]) {
-                case "手机防盗":
+            switch (position) {
+                case 0://"手机防盗":
                     String password = SPTool.getSring(getApplicationContext(), MyConstants.PASSWORD , "");
                     if (TextUtils.isEmpty(password)) {
                         MySetPassDialog();
@@ -121,24 +121,30 @@ public class HomeActivity extends Activity {
                         MyEnterPassDialog(password);
                     }
                     break;
-                case "通讯卫士":
+                case 1://"通讯卫士":
                     break;
-                case "软件管家":
+                case 2://"软件管家":
                     break;
-                case "进程管理":
+                case 3://"进程管理":
                     break;
-                case "流量统计":
+                case 4://"流量统计":
                     break;
-                case "病毒查杀":
+                case 5://"病毒查杀":
                     break;
-                case "缓存清除":
+                case 6://"缓存清除":
                     break;
-                case "高级工具":
+                case 7://"高级工具":
                     break;
-                case "设置中心":
+                case 8://"设置中心":
+                    loadsettingcenter();
                     break;
             }
         }
+    }
+
+    private void loadsettingcenter() {
+        Intent intent = new Intent(HomeActivity.this, SettingCenter.class);
+        startActivity(intent);
     }
 
     private void MyEnterPassDialog(final String pd) {

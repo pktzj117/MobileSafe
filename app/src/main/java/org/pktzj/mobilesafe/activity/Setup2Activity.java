@@ -37,11 +37,11 @@ public class Setup2Activity extends BaseSetupActivity {
         super.initData();
         String simnum = SPTool.getSring(this, MyConstants.SIMNUM, "");
         if (TextUtils.isEmpty(simnum)) {
-            Drawable drawable= getResources().getDrawable(R.drawable.unlock,null);
+            Drawable drawable= getResources().getDrawable(R.drawable.unlock);
             drawable.setBounds(0, 0, bt_bindsim.getMinimumHeight(), bt_bindsim.getMinimumHeight());
             bt_bindsim.setCompoundDrawables(null,null,drawable,null);
         } else {
-            Drawable drawable= getResources().getDrawable(R.drawable.lock,null);
+            Drawable drawable= getResources().getDrawable(R.drawable.lock);
             drawable.setBounds(0, 0, bt_bindsim.getMinimumHeight(), bt_bindsim.getMinimumHeight());
             bt_bindsim.setCompoundDrawables(null,null,drawable,null);
         }
@@ -58,12 +58,12 @@ public class Setup2Activity extends BaseSetupActivity {
                 SPTool.putSring(this, MyConstants.SIMNUM, simSerialNumber);
             }
 
-            Drawable drawable= getResources().getDrawable(R.drawable.lock,null);
+            Drawable drawable= getResources().getDrawable(R.drawable.lock);
             drawable.setBounds(0, 0, bt_bindsim.getMinimumHeight(), bt_bindsim.getMinimumHeight());
             bt_bindsim.setCompoundDrawables(null,null,drawable,null);
         } else {//已绑定sim卡  进行解绑操作
             SPTool.putSring(this, MyConstants.SIMNUM, "");
-            Drawable drawable= getResources().getDrawable(R.drawable.unlock,null);
+            Drawable drawable= getResources().getDrawable(R.drawable.unlock);
             drawable.setBounds(0, 0, bt_bindsim.getMinimumHeight(), bt_bindsim.getMinimumHeight());
             bt_bindsim.setCompoundDrawables(null,null,drawable,null);
         }

@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 
@@ -92,18 +93,21 @@ public class SplashActivity extends Activity {
                     loadMain();
                     break;
                 case ERROR:
-                    switch (ERROR) {
+                    switch (msg.arg1) {
                         case 404:
                             Toast.makeText(getApplicationContext(), "404 not found!", Toast.LENGTH_SHORT).show();
                             break;
                         case 4001:
-                            Toast.makeText(getApplicationContext(), "错误4001", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "错误4001 无网络服务!", Toast.LENGTH_SHORT).show();
                             break;
                         case 4002:
                             Toast.makeText(getApplicationContext(), "错误4002 json", Toast.LENGTH_SHORT).show();
                             break;
+                        case 4003:
+                            Toast.makeText(getApplicationContext(), "错误4003 url输入错误", Toast.LENGTH_SHORT).show();
+                            break;
                         default:
-                            Toast.makeText(getApplicationContext(),"一般错误",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "一般错误", Toast.LENGTH_SHORT).show();
                             break;
                     }
                     loadMain();
@@ -258,10 +262,14 @@ public class SplashActivity extends Activity {
                 int error = NOERROR;//正常码
                 try {
                     startTimeMillis = System.currentTimeMillis();
-                    URL url = new URL("http://192.168.1.101/safejson");
+                    URL url = null;
+
+                    url = new URL("http://192.168.1.101/safejson");
                     conn = (HttpURLConnection) url.openConnection();
-                    conn.setReadTimeout(5 * 1000);
-                    conn.setConnectTimeout(5 * 1000);
+
+                    conn.setReadTimeout(3 * 1000);
+                    conn.setConnectTimeout(3 * 1000);
+
                     conn.setRequestMethod("GET");
                     if (conn.getResponseCode() == 200) {
                         //获取读取的字节流
@@ -281,11 +289,13 @@ public class SplashActivity extends Activity {
                     } else {
                         error = 404;
                     }
+                } catch (MalformedURLException e) {
+                    error = 4003;//url输入错误
                 } catch (IOException e) {
-                    error = 4001;
+                    error = 4001;//没有网络
                     e.printStackTrace();
                 } catch (JSONException e) {
-                    error = 4002;
+                    error = 4002;//服务器json格式错误
                     e.printStackTrace();
                 } finally {
                     Message msg = Message.obtain();
