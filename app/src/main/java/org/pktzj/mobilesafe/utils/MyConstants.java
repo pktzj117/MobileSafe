@@ -11,4 +11,12 @@ public interface MyConstants {
     String SIMNUM = "SimSerialNumber";//绑定的本机sim卡
     String SAFENUM = "safenum";//发送信息的安全号码
     int CONTACTSQCODE = 100;
+
+    String BLACKTB = "blacktb";
+    String PHONE = "phone";
+    String MODE = "mode";
+    int PHONEMODE = 1 << 0;
+    int SMSMODE = 1 << 1;
+    int ALLMODE = PHONEMODE | SMSMODE;
+    int PAGENUM = 20;
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@drawable/bt_selector_blue"
+    android:clickable="true"
+    android:onClick="changeblacknum">
+
+    <TextView
+        android:id="@+id/tv_phone_blacknum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:text="拦截号码: "
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_mode_blacknum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_phone_blacknum"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="5dip"
+        android:text="拦截方式"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/ib_delete_blacknum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/vb_selector" />
+
+    <View
+        android:id="@+id/v_list_devider"
+        android:layout_width="match_parent"
+        android:layout_height="3dip"
+        android:layout_below="@id/tv_mode_blacknum"
+        android:background="@drawable/list_devider" />
+</RelativeLayout>

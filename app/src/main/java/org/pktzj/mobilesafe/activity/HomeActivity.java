@@ -122,6 +122,7 @@ public class HomeActivity extends Activity {
                     }
                     break;
                 case 1://"通讯卫士":
+                    startActivity(TelSmsSafeActivity.class);
                     break;
                 case 2://"软件管家":
                     break;
@@ -136,14 +137,16 @@ public class HomeActivity extends Activity {
                 case 7://"高级工具":
                     break;
                 case 8://"设置中心":
-                    loadsettingcenter();
+                    startActivity(SettingCenter.class);
                     break;
             }
         }
     }
 
-    private void loadsettingcenter() {
-        Intent intent = new Intent(HomeActivity.this, SettingCenter.class);
+
+
+    private void startActivity(Class clazz) {
+        Intent intent = new Intent(HomeActivity.this, clazz);
         startActivity(intent);
     }
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        style="@style/tv_title"
+        android:text="修改界面" />
+
+    <EditText
+        android:id="@+id/et_phone_blacknum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:inputType="phone"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_phonemode_blacknum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/bt_selector_blue"
+            android:text="电话拦截"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/cb_smsmode_blacknum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/bt_selector_blue"
+            android:text="短信拦截"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/bt_cancel_blacknum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bt_selector"
+            android:text="取消"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/bt_enter_blacknum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bt_selector"
+            android:text="确定"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+</LinearLayout>
