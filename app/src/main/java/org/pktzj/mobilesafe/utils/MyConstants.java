@@ -10,13 +10,18 @@ public interface MyConstants {
     String ISSETUP = "issetup";//是否进入过设置向导界面
     String SIMNUM = "SimSerialNumber";//绑定的本机sim卡
     String SAFENUM = "safenum";//发送信息的安全号码
+    String SELNUM = "selnum"; //从选中的号码
     int CONTACTSQCODE = 100;
+
+
+
+    //设置中心
+    String UPDATESERVICE = "updateservice";//启动更新服务是否开启标志
+    String BLACKNUM = "blacknum";//黑名单服务是否开启标志
+
 
     String BLACKTB = "blacktb";
     String PHONE = "phone";
     String MODE = "mode";
-    int PHONEMODE = 1 << 0;
-    int SMSMODE = 1 << 1;
-    int ALLMODE = PHONEMODE | SMSMODE;
-    int PAGENUM = 20;
+
 }

@@ -3,6 +3,7 @@ package org.pktzj.mobilesafe.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class TelSmsSafeActivity extends Activity {
     private BlackDAO blackDAO;
     private MyAdapter adapter;
     private PopupWindow popupWindow;
+    private boolean isPopShow;
 
 
     @Override
@@ -55,9 +57,14 @@ public class TelSmsSafeActivity extends Activity {
 
     }
 
+    private void closePopup() {
+        if (popupWindow != null && isPopShow == true) {
+            popupWindow.dismiss();
+        }
+    }
 
     private void initPopup() {
-        View popView = View.inflate(TelSmsSafeActivity.this, R.layout.popup_addblacknum_telsmssafe, null);
+        final View popView = View.inflate(TelSmsSafeActivity.this, R.layout.popup_addblacknum_telsmssafe, null);
         TextView tv_manual = (TextView) popView.findViewById(R.id.tv_popup_manual);
         TextView tv_calllog = (TextView) popView.findViewById(R.id.tv_popup_calllog);
         TextView tv_phonelog = (TextView) popView.findViewById(R.id.tv_popup_phonelog);
@@ -66,20 +73,31 @@ public class TelSmsSafeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
-                    case R.id.tv_popup_manual:
+                    case R.id.tv_popup_manual://手动添加
                         Toast.makeText(TelSmsSafeActivity.this, "手动添加", Toast.LENGTH_SHORT).show();
+                        initDialog(null, "输入黑名单号码");
                         break;
                     case R.id.tv_popup_calllog:
-                        Toast.makeText(TelSmsSafeActivity.this, "通话导入", Toast.LENGTH_SHORT).show();
-                        break;
+                        Toast.makeText(TelSmsSafeActivity.this, "联系导入", Toast.LENGTH_SHORT).show();
+                    {
+                        Intent intent = new Intent(TelSmsSafeActivity.this, ContactsActivity.class);
+                        startActivityForResult(intent, MyConstants.CONTACTSQCODE);
+                    }
+                    break;
                     case R.id.tv_popup_phonelog:
-
                         Toast.makeText(TelSmsSafeActivity.this, "电话导入", Toast.LENGTH_SHORT).show();
-                        break;
+                    {
+                        Intent intent = new Intent(TelSmsSafeActivity.this, CallLogActivity.class);
+                        startActivityForResult(intent, MyConstants.CONTACTSQCODE);
+                    }
+                    break;
                     case R.id.tv_popup_smslog:
-
                         Toast.makeText(TelSmsSafeActivity.this, "短信导入", Toast.LENGTH_SHORT).show();
-                        break;
+                    {
+                        Intent intent = new Intent(TelSmsSafeActivity.this, CallLogActivity.class);
+                        startActivityForResult(intent, MyConstants.CONTACTSQCODE);
+                    }
+                    break;
                     default:
                         break;
                 }
@@ -93,6 +111,78 @@ public class TelSmsSafeActivity extends Activity {
 
         popupWindow = new PopupWindow(popView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        isPopShow = true;
+    }
+
+    private void initDialog(String content, String hint) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(TelSmsSafeActivity.this);
+        View view = View.inflate(TelSmsSafeActivity.this, R.layout.dialog_changemode_blacknum, null);
+        final EditText et_phone = (EditText) view.findViewById(R.id.et_phone_blacknum);
+        final CheckBox cb_phone = (CheckBox) view.findViewById(R.id.cb_phonemode_blacknum);
+        final CheckBox cb_sms = (CheckBox) view.findViewById(R.id.cb_smsmode_blacknum);
+        Button bt_enter = (Button) view.findViewById(R.id.bt_enter_blacknum);
+        Button bt_cancel = (Button) view.findViewById(R.id.bt_cancel_blacknum);
+        if (content != null) {
+            et_phone.setText(content);
+        } else if (hint != null) {
+            et_phone.setHint(hint);
+        }
+
+
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        //设置事件
+        bt_enter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int mode = 0;
+                BlackBean blackBean = new BlackBean();
+                blackBean.setPhone(et_phone.getText().toString());
+                if (cb_phone.isChecked()) {
+                    mode = mode | BlackDAO.PHONEMODE;
+                }
+                if (cb_sms.isChecked()) {
+                    mode = mode | BlackDAO.SMSMODE;
+                }
+                //对数据进行检查后再进行修改
+                if (mode == 0) {
+                    Toast.makeText(TelSmsSafeActivity.this, "至少选择一种拦截模式!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(blackBean.getPhone())) {
+                    Toast.makeText(TelSmsSafeActivity.this, "拦截号码不能为空!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //对数据进行修改  并通知
+
+                blackBean.setMode(mode);
+                blacknums.add(0, blackBean);
+                blackDAO.dupdate(blackBean);
+                //发送消息：数据加载完成
+                handler.obtainMessage(LOADINGCOMPLETED).sendToTarget();
+                dialog.dismiss();
+                closePopup();
+            }
+        });
+        bt_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //取消
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            String phone = data.getStringExtra(MyConstants.SELNUM);
+            initDialog(phone, null);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private Handler handler = new Handler() {
@@ -101,17 +191,18 @@ public class TelSmsSafeActivity extends Activity {
             switch (msg.what) {
                 case LOADING:
                     pb_blacknum.setVisibility(View.VISIBLE);
+                    tv_blacknum.setVisibility(View.GONE);
+                    lv_blacknum.setVisibility(View.GONE);
                     break;
                 case LOADINGCOMPLETED:
                     pb_blacknum.setVisibility(View.GONE);
-                    if (blacknums.size() == 0) {
-                        tv_blacknum.setVisibility(View.VISIBLE);
-                    } else {
-                        lv_blacknum.setVisibility(View.VISIBLE);
-                        adapter.notifyDataSetChanged();
-                    }
+                    tv_blacknum.setVisibility(View.GONE);
+                    lv_blacknum.setVisibility(View.VISIBLE);
+                    adapter.notifyDataSetChanged();
                     break;
                 case NOMOREDATA:
+                    lv_blacknum.setVisibility(View.VISIBLE);
+                    tv_blacknum.setVisibility(View.GONE);
                     pb_blacknum.setVisibility(View.GONE);
                     Toast.makeText(TelSmsSafeActivity.this, "没有更多数据!", Toast.LENGTH_SHORT).show();
                     break;
@@ -145,13 +236,13 @@ public class TelSmsSafeActivity extends Activity {
                 message.what = LOADING;
                 handler.sendMessage(message);
 
-
                 //获取数据
 
-                List<BlackBean> moreData = blackDAO.getDatas(blacknums.size(), MyConstants.PAGENUM);
+                List<BlackBean> moreData = blackDAO.getDatas(blacknums.size(), BlackDAO.PAGENUM);
                 if (moreData.size() == 0) {
                     handler.obtainMessage(NOMOREDATA).sendToTarget();
                 } else {
+
                     blacknums.addAll(moreData);
                     //调试演示
                     SystemClock.sleep(1000);
@@ -159,8 +250,6 @@ public class TelSmsSafeActivity extends Activity {
                     //发送消息：数据加载完成
                     handler.obtainMessage(LOADINGCOMPLETED).sendToTarget();
                 }
-
-
             }
         }.start();
     }
@@ -205,7 +294,14 @@ public class TelSmsSafeActivity extends Activity {
     private class MyAdapter extends BaseAdapter {
         @Override
         public int getCount() {
-            return blacknums.size();
+            int size = blacknums.size();
+            if (size == 0) {
+                lv_blacknum.setVisibility(View.GONE);
+                tv_blacknum.setVisibility(View.VISIBLE);
+                pb_blacknum.setVisibility(View.GONE);
+            }
+
+            return size;
         }
 
         @Override
@@ -239,13 +335,13 @@ public class TelSmsSafeActivity extends Activity {
             final BlackBean blacknum = blacknums.get(position);
             itemView.tv_phone.setText("拦截号码: " + blacknum.getPhone());
             switch (blacknum.getMode()) {
-                case MyConstants.ALLMODE:
+                case BlackDAO.ALLMODE:
                     itemView.tv_mode.setText("全部拦截");
                     break;
-                case MyConstants.PHONEMODE:
+                case BlackDAO.PHONEMODE:
                     itemView.tv_mode.setText("电话拦截");
                     break;
-                case MyConstants.SMSMODE:
+                case BlackDAO.SMSMODE:
                     itemView.tv_mode.setText("短息拦截");
                     break;
                 default:
@@ -266,10 +362,10 @@ public class TelSmsSafeActivity extends Activity {
 
                     //初始化界面
                     et_phone.setText(blacknum.getPhone());
-                    if ((blacknum.getMode() & MyConstants.PHONEMODE) == MyConstants.PHONEMODE) {
+                    if ((blacknum.getMode() & BlackDAO.PHONEMODE) == BlackDAO.PHONEMODE) {
                         cb_phone.setChecked(true);
                     }
-                    if ((blacknum.getMode() & MyConstants.SMSMODE) == MyConstants.SMSMODE) {
+                    if ((blacknum.getMode() & BlackDAO.SMSMODE) == BlackDAO.SMSMODE) {
                         cb_sms.setChecked(true);
                     }
                     builder.setView(view);
@@ -282,10 +378,10 @@ public class TelSmsSafeActivity extends Activity {
                             BlackBean blackBean = new BlackBean();
                             blackBean.setPhone(et_phone.getText().toString());
                             if (cb_phone.isChecked()) {
-                                mode = mode | MyConstants.PHONEMODE;
+                                mode = mode | BlackDAO.PHONEMODE;
                             }
                             if (cb_sms.isChecked()) {
-                                mode = mode | MyConstants.SMSMODE;
+                                mode = mode | BlackDAO.SMSMODE;
                             }
                             //对数据进行检查后再进行修改
                             if (mode == 0) {
@@ -301,7 +397,7 @@ public class TelSmsSafeActivity extends Activity {
 
                             blackBean.setMode(mode);
                             blacknums.remove(position);
-                            blacknums.add(0,blackBean);
+                            blacknums.add(0, blackBean);
                             blackDAO.dupdate(blackBean);
                             adapter.notifyDataSetChanged();
                             dialog.dismiss();

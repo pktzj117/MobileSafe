@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Telephony;
 import android.telephony.SmsMessage;
-import android.util.EventLog;
 import android.util.Log;
 
 import org.pktzj.mobilesafe.R;
@@ -50,7 +49,7 @@ public class LostFindService extends Service {
         super.onDestroy();
     }
 
-    private class SmsReceiver extends BroadcastReceiver {
+    class SmsReceiver extends BroadcastReceiver {
         @TargetApi(Build.VERSION_CODES.M)
         @Override
         public void onReceive(Context context, Intent intent) {

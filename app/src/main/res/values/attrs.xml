@@ -9,7 +9,7 @@
              to allow the children to draw outside of their bounds. The default value of
              this property is true.
         -->
-        <attr name="title" format="string" />
-        <attr name="content" format="string" />
+        <attr name="itemtitle" format="string" />
+        <attr name="itemcontent" format="string" />
     </declare-styleable>
 </resources>

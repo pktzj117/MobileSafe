@@ -53,7 +53,7 @@
         android:clickable="true"
         android:drawableLeft="@android:drawable/btn_star_big_on"
         android:gravity="center"
-        android:text="短息导入"
+        android:text="短信导入"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 </LinearLayout>

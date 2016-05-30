@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.pktzj.mobilesafe.R;
-import org.pktzj.mobilesafe.activity.SettingCenter;
 
 /**
  * Created by pktzj on 2016/5/24.
@@ -42,13 +41,34 @@ public class SettingCenterItemView extends LinearLayout{
         super(context, attrs);
         initView();
         initEvent();
-        String title = attrs.getAttributeValue("http://schemas.android.com/apk/res-auto", "title");
-        String content = attrs.getAttributeValue("http://schemas.android.com/apk/res-auto", "content");
-
+        String title = attrs.getAttributeValue("http://schemas.android.com/apk/res-auto", "itemtitle");
+        String content = attrs.getAttributeValue("http://schemas.android.com/apk/res-auto", "itemcontent");
         tv_title.setText(title);
         contents = content.split("-");
+
+        tv_content.setTextColor(Color.RED);
+        tv_content.setText(contents[0]);
+
     }
 
+    /**
+     * 设置item里的checkbox的状态
+     * @param isChecked
+     */
+    public void setChecked(boolean isChecked) {
+        cb_check.setChecked(isChecked);
+    }
+    /**
+     * @return
+     * item里的checkbox的状态
+     */
+    public boolean isChecked() {
+        return cb_check.isChecked();
+    }
+
+    public void setItemOnClickListener(OnClickListener listener) {
+        item.setOnClickListener(listener);
+    }
     private void initEvent() {
         //item相对布局
         item.setOnClickListener(new OnClickListener() {

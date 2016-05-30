@@ -144,7 +144,6 @@ public class HomeActivity extends Activity {
     }
 
 
-
     private void startActivity(Class clazz) {
         Intent intent = new Intent(HomeActivity.this, clazz);
         startActivity(intent);

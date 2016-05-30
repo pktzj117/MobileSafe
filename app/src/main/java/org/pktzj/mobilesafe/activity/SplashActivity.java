@@ -15,6 +15,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.pktzj.mobilesafe.R;
 import org.pktzj.mobilesafe.domain.UrlBean;
+import org.pktzj.mobilesafe.utils.MyConstants;
+import org.pktzj.mobilesafe.utils.SPTool;
 import org.pktzj.mobilesafe.utils.XUtil;
 import org.xutils.common.Callback;
 import org.xutils.x;
@@ -61,10 +64,9 @@ public class SplashActivity extends Activity {
         initView();
         //初始化数据
         initData();
-        //c初始化动画
+        //初始化动画
         initAnimation();
-        //检测服务器的版本
-        checkVersion();
+        //检测服务器的版本 放在动画监听器开始事件中
     }
 
     private void initData() {
@@ -84,7 +86,7 @@ public class SplashActivity extends Activity {
         }
     }
 
-    private Handler handler = new Handler() {
+    protected final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             //处理消息
@@ -264,7 +266,7 @@ public class SplashActivity extends Activity {
                     startTimeMillis = System.currentTimeMillis();
                     URL url = null;
 
-                    url = new URL("http://192.168.1.101/safejson");
+                    url = new URL("http://192.168.1.100/webb/safejson");
                     conn = (HttpURLConnection) url.openConnection();
 
                     conn.setReadTimeout(3 * 1000);
@@ -354,6 +356,27 @@ public class SplashActivity extends Activity {
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setDuration(3000);
         alphaAnimation.setFillAfter(true);
+        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                if (SPTool.getboolean(SplashActivity.this, MyConstants.UPDATESERVICE, false)) {
+                    //检测服务器的版本 放在动画监听器开始事件中
+                    checkVersion();
+                }
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (!SPTool.getboolean(SplashActivity.this, MyConstants.UPDATESERVICE, false)) {
+                    handler.obtainMessage(LOADMAIN).sendToTarget();
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         rl_root.startAnimation(alphaAnimation);
     }
 
@@ -364,6 +387,4 @@ public class SplashActivity extends Activity {
         tv_versionName = (TextView) findViewById(R.id.tv);
         pb_download = (ProgressBar) findViewById(R.id.pb_download);
     }
-
-
 }

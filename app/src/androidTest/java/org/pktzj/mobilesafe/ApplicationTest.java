@@ -33,7 +33,8 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     public void test() {
-        List<ContactBean> contacts = readContactEngine.readContarts(getContext());
+//        List<ContactBean> contacts = readContactEngine.readContarts(getContext());
+        List<ContactBean> contacts = readContactEngine.readCallLog(getContext());
         for (ContactBean contact : contacts) {
             Log.d(MyConstants.TAG, contact.toString());
         }
@@ -87,5 +88,11 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         for (BlackBean data : datas) {
             Log.d(MyConstants.TAG, data.toString());
         }
+    }
+
+    public void testgetMode() {
+        BlackDAO blackDAO = new BlackDAO(getContext());
+        int mode = blackDAO.getMode("110");
+        Log.d(MyConstants.TAG, "mode: " + mode);
     }
 }

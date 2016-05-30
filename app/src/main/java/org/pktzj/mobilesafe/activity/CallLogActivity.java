@@ -8,10 +8,10 @@ import java.util.List;
 /**
  * Created by pktzj on 2016/5/20.
  */
-public class ContactsActivity extends TelCallSMSBaseActivity {
+public class CallLogActivity extends TelCallSMSBaseActivity {
 
     @Override
     protected List<ContactBean> getContactBeen() {
-        return readContactEngine.readContarts(ContactsActivity.this);
+        return readContactEngine.readCallLog(CallLogActivity.this);
     }
 }

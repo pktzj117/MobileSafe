@@ -17,7 +17,10 @@ import java.util.List;
  */
 public class BlackDAO {
     private BlackDB blackDB;
-
+    public static final int PHONEMODE = 1 << 0;
+    public static final int SMSMODE = 1 << 1;
+    public static final int ALLMODE = PHONEMODE | SMSMODE;
+    public static final int PAGENUM = 20;
     public BlackDAO(Context context) {
         this.blackDB = new BlackDB(context);
     }
@@ -40,6 +43,19 @@ public class BlackDAO {
         long insert = db.insert(MyConstants.BLACKTB, null, values);
         db.close();
         return insert;
+    }
+
+    public int getMode(String phone) {
+        List<BlackBean> blacknums = new ArrayList<BlackBean>();
+        BlackBean blacknum = null;
+        SQLiteDatabase db = blackDB.getReadableDatabase();
+
+        Cursor cursor = db.query(MyConstants.BLACKTB, new String[]{MyConstants.MODE}, "phone=?", new String[]{phone}, null, null,null);
+        if (cursor.moveToNext()) {
+            int mode = cursor.getInt(cursor.getColumnIndex(MyConstants.MODE));
+            return mode;
+        }
+        return 0;
     }
 
     public List<BlackBean> getDatas(int start,int num) {
