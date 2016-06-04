@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/activity_appmanager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.pktzj.mobilesafe.activity.APPManagerActivity">
+    <TextView
+        android:text="软件管家"
+        style="@style/tv_title"
+         />
+    <FrameLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/lv_appmanager"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ProgressBar
+            android:id="@+id/pb_appmanager"
+            android:visibility="gone"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+</LinearLayout>

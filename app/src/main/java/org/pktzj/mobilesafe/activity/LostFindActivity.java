@@ -43,7 +43,7 @@ public class LostFindActivity extends Activity {
     private void initData() {
         boolean issetup = SPTool.getboolean(LostFindActivity.this, MyConstants.ISSETUP, false);
         if (issetup) {
-            tv_safenum.setText("安全号码: " + SPTool.getSring(LostFindActivity.this, MyConstants.SAFENUM, ""));
+            tv_safenum.setText("安全号码: " + SPTool.getString(LostFindActivity.this, MyConstants.SAFENUM, ""));
 //            Drawable drawable= getResources().getDrawable(R.drawable.lock,null);
 //            drawable.setBounds(0, 0, tv_issetup.getWidth(), tv_issetup.getHeight());
 //            tv_issetup.setCompoundDrawables(null,null,drawable,null);

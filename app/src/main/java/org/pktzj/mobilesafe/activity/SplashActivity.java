@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.pktzj.mobilesafe.R;
 import org.pktzj.mobilesafe.domain.UrlBean;
+import org.pktzj.mobilesafe.utils.AssetsUtils;
 import org.pktzj.mobilesafe.utils.MyConstants;
 import org.pktzj.mobilesafe.utils.SPTool;
 import org.pktzj.mobilesafe.utils.XUtil;
@@ -39,6 +40,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import static android.R.attr.name;
+import static android.R.attr.packageNames;
 
 
 public class SplashActivity extends Activity {
@@ -359,6 +363,17 @@ public class SplashActivity extends Activity {
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                //判断文件是否存在，如果存在不需要拷贝
+                File file = new File("/data/data/" + packageNames + "/files/" + name);
+                if (!file.exists()) {//文件存在
+                    try {
+                        AssetsUtils.filecopy(SplashActivity.this,"address.db");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                //拷贝文件
                 if (SPTool.getboolean(SplashActivity.this, MyConstants.UPDATESERVICE, false)) {
                     //检测服务器的版本 放在动画监听器开始事件中
                     checkVersion();

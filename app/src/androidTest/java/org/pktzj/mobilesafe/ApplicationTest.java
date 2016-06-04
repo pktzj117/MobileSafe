@@ -8,8 +8,11 @@ import android.test.ApplicationTestCase;
 import android.util.Log;
 
 import org.pktzj.mobilesafe.dao.BlackDAO;
+import org.pktzj.mobilesafe.domain.APPBean;
 import org.pktzj.mobilesafe.domain.BlackBean;
 import org.pktzj.mobilesafe.domain.ContactBean;
+import org.pktzj.mobilesafe.engine.APPMangerEngine;
+import org.pktzj.mobilesafe.engine.PhoneLocationEngine;
 import org.pktzj.mobilesafe.engine.readContactEngine;
 import org.pktzj.mobilesafe.service.LostFindService;
 import org.pktzj.mobilesafe.utils.MyConstants;
@@ -45,7 +48,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     public void testsms() {
-        String safenum = SPTool.getSring(getContext(), MyConstants.SAFENUM, "");
+        String safenum = SPTool.getString(getContext(), MyConstants.SAFENUM, "");
 
         //发送短信给安全号码
         SmsManager sm = SmsManager.getDefault();
@@ -89,10 +92,33 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             Log.d(MyConstants.TAG, data.toString());
         }
     }
-
+    //获得黑名单号码的拦截模式
     public void testgetMode() {
         BlackDAO blackDAO = new BlackDAO(getContext());
         int mode = blackDAO.getMode("110");
         Log.d(MyConstants.TAG, "mode: " + mode);
     }
+
+    //手机号码归属地
+    public void testmobilelocation() {
+        String number = "15273200836";
+        String location = PhoneLocationEngine.mobileQuery(getContext(), number);
+        Log.d("MobileLocation", "location: " + location);
+    }
+
+    //固话号码归属地
+    public void testphonelocation() {
+        String number = "8452768";
+        String location = PhoneLocationEngine.phoneQuery(getContext(), number);
+        Log.d("PhoneLocation", "location: " + location);
+    }
+
+    //
+    public void testgetAllAPK() {
+        List<APPBean> allAPK = APPMangerEngine.getAllAPK(getContext());
+        for (APPBean appBean : allAPK) {
+            Log.d("APP", appBean.toString());
+        }
+    }
+
 }

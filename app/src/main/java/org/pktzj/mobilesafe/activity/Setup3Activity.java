@@ -28,7 +28,7 @@ public class Setup3Activity extends BaseSetupActivity {
     @Override
     protected void initData() {
         super.initData();
-        et_safenum.setText((SPTool.getSring(this, MyConstants.SAFENUM, "")));
+        et_safenum.setText((SPTool.getString(this, MyConstants.SAFENUM, "")));
     }
 
     public void setsafenum(View view) {
@@ -50,8 +50,8 @@ public class Setup3Activity extends BaseSetupActivity {
     @Override
     public void next(View view) {
         String safenum = et_safenum.getText().toString();
-        SPTool.putSring(this, MyConstants.SAFENUM,safenum);
-        if (TextUtils.isEmpty(SPTool.getSring(this, MyConstants.SAFENUM, ""))) {
+        SPTool.putString(this, MyConstants.SAFENUM,safenum);
+        if (TextUtils.isEmpty(SPTool.getString(this, MyConstants.SAFENUM, ""))) {
             Toast.makeText(Setup3Activity.this, "请先设置安全号码!", Toast.LENGTH_SHORT).show();
             return;
         }

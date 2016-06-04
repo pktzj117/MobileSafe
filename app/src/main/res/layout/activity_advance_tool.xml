@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_advance_tool"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.pktzj.mobilesafe.activity.AdvanceToolActivity">
+
+    <TextView
+        style="@style/tv_title"
+        android:text="高级工具" />
+
+
+    <TextView
+        android:id="@+id/tv_location_advancetool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bt_selector_blue"
+        android:drawableLeft="@android:drawable/btn_star_big_on"
+        android:gravity="center_vertical"
+        android:text="电话归属地查询"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_smsback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bt_selector_blue"
+        android:drawableLeft="@android:drawable/btn_star_big_on"
+        android:gravity="center_vertical"
+        android:text="短信备份"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_smsresu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bt_selector_blue"
+        android:drawableLeft="@android:drawable/btn_star_big_on"
+        android:gravity="center_vertical"
+        android:text="短信还原"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+</LinearLayout>

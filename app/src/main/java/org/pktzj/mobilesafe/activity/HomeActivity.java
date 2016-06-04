@@ -114,7 +114,7 @@ public class HomeActivity extends Activity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch (position) {
                 case 0://"手机防盗":
-                    String password = SPTool.getSring(getApplicationContext(), MyConstants.PASSWORD , "");
+                    String password = SPTool.getString(getApplicationContext(), MyConstants.PASSWORD , "");
                     if (TextUtils.isEmpty(password)) {
                         MySetPassDialog();
                     } else {
@@ -125,6 +125,7 @@ public class HomeActivity extends Activity {
                     startActivity(TelSmsSafeActivity.class);
                     break;
                 case 2://"软件管家":
+                    startActivity(APPManagerActivity.class);
                     break;
                 case 3://"进程管理":
                     break;
@@ -135,6 +136,7 @@ public class HomeActivity extends Activity {
                 case 6://"缓存清除":
                     break;
                 case 7://"高级工具":
+                    startActivity(AdvanceToolActivity.class);
                     break;
                 case 8://"设置中心":
                     startActivity(SettingCenter.class);
@@ -221,7 +223,7 @@ public class HomeActivity extends Activity {
                     //保存密码
                     String password = MD5Utils.md5(MD5Utils.md5(passwordone));
                     Log.d(TAG, "password: " + password);
-                    SPTool.putSring(getApplicationContext(), MyConstants.PASSWORD, password);
+                    SPTool.putString(getApplicationContext(), MyConstants.PASSWORD, password);
                     dialog.dismiss();
                 }
             }

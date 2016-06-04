@@ -138,7 +138,7 @@ public class TelSmsSafeActivity extends Activity {
             public void onClick(View v) {
                 int mode = 0;
                 BlackBean blackBean = new BlackBean();
-                blackBean.setPhone(et_phone.getText().toString());
+                blackBean.setPhone(et_phone.getText().toString().trim());
                 if (cb_phone.isChecked()) {
                     mode = mode | BlackDAO.PHONEMODE;
                 }
@@ -376,7 +376,7 @@ public class TelSmsSafeActivity extends Activity {
                         public void onClick(View v) {
                             int mode = 0;
                             BlackBean blackBean = new BlackBean();
-                            blackBean.setPhone(et_phone.getText().toString());
+                            blackBean.setPhone(et_phone.getText().toString().trim());
                             if (cb_phone.isChecked()) {
                                 mode = mode | BlackDAO.PHONEMODE;
                             }

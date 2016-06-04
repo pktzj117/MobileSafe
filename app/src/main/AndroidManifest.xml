@@ -16,8 +16,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
 
     <application
         android:name=".utils.MyApplication"
@@ -77,12 +79,20 @@
             </intent-filter>
         </receiver>
 
-
-
         <service
             android:name=".service.TelSMSBlackService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".activity.AdvanceToolActivity" />
+        <activity android:name=".activity.LocationActivity" />
+
+        <service
+            android:name=".service.PhoneLocationService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".activity.APPManagerActivity"></activity>
     </application>
 
 </manifest>

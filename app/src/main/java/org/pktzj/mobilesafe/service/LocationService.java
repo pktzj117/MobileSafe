@@ -5,7 +5,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
-import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -56,7 +55,7 @@ public class LocationService extends Service {
                 tv_mess.append("speed: " + speed + "\n");
 
                 //发送短信
-                String safenum = SPTool.getSring(LocationService.this, MyConstants.SAFENUM, "");
+                String safenum = SPTool.getString(LocationService.this, MyConstants.SAFENUM, "");
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(safenum, "", tv_mess + "", null, null);
 

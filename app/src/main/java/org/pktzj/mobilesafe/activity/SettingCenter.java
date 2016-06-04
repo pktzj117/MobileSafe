@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import org.pktzj.mobilesafe.R;
+import org.pktzj.mobilesafe.service.PhoneLocationService;
 import org.pktzj.mobilesafe.service.TelSMSBlackService;
 import org.pktzj.mobilesafe.utils.MyConstants;
 import org.pktzj.mobilesafe.utils.SPTool;
@@ -16,6 +17,7 @@ public class SettingCenter extends Activity {
 
     private SettingCenterItemView id_update;
     private SettingCenterItemView id_blacknum;
+    private SettingCenterItemView id_phonelocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +54,28 @@ public class SettingCenter extends Activity {
                 }
             }
         });
+
+        id_phonelocation.setItemOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean ischecked = !id_phonelocation.isChecked();
+                id_phonelocation.setChecked(ischecked);
+                SPTool.putboolean(SettingCenter.this,MyConstants.PHONELOCA,ischecked);
+                //开启和关闭服务
+                Intent service = new Intent(SettingCenter.this, PhoneLocationService.class);
+                if (ServiceUtils.serviceIsRunning(SettingCenter.this, PhoneLocationService.class) && !ischecked) {
+                    stopService(service);
+                } else if (!ServiceUtils.serviceIsRunning(SettingCenter.this, PhoneLocationService.class) && ischecked) {
+                    startService(service);
+                }
+            }
+        });
     }
 
     private void initData() {
         id_update.setChecked(SPTool.getboolean(SettingCenter.this, MyConstants.UPDATESERVICE,false));
         id_blacknum.setChecked(SPTool.getboolean(SettingCenter.this, MyConstants.BLACKNUM,false));
+        id_phonelocation.setChecked(SPTool.getboolean(SettingCenter.this, MyConstants.PHONELOCA,false));
     }
 
     private void initView() {
@@ -65,5 +84,6 @@ public class SettingCenter extends Activity {
         //获取启动更新控件
         id_update = (SettingCenterItemView) findViewById(R.id.SettingCenterItemView_update);
         id_blacknum = (SettingCenterItemView) findViewById(R.id.SettingCenterItemView_blacknum);
+        id_phonelocation = (SettingCenterItemView) findViewById(R.id.SettingCenterItemView_phonelocation);
     }
 }

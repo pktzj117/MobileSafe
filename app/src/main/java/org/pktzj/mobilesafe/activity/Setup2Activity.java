@@ -35,7 +35,7 @@ public class Setup2Activity extends BaseSetupActivity {
     @Override
     protected void initData() {
         super.initData();
-        String simnum = SPTool.getSring(this, MyConstants.SIMNUM, "");
+        String simnum = SPTool.getString(this, MyConstants.SIMNUM, "");
         if (TextUtils.isEmpty(simnum)) {
             Drawable drawable= getResources().getDrawable(R.drawable.unlock);
             drawable.setBounds(0, 0, bt_bindsim.getMinimumHeight(), bt_bindsim.getMinimumHeight());
@@ -50,19 +50,19 @@ public class Setup2Activity extends BaseSetupActivity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void changebindsim(View view) {
 
-        String simnum = SPTool.getSring(this, MyConstants.SIMNUM, "");
+        String simnum = SPTool.getString(this, MyConstants.SIMNUM, "");
         if (TextUtils.isEmpty(simnum)) {//未绑定sim卡  进行绑定操作
             {   //绑定sim卡
                 TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
                 String simSerialNumber = tm.getSimSerialNumber();
-                SPTool.putSring(this, MyConstants.SIMNUM, simSerialNumber);
+                SPTool.putString(this, MyConstants.SIMNUM, simSerialNumber);
             }
 
             Drawable drawable= getResources().getDrawable(R.drawable.lock);
             drawable.setBounds(0, 0, bt_bindsim.getMinimumHeight(), bt_bindsim.getMinimumHeight());
             bt_bindsim.setCompoundDrawables(null,null,drawable,null);
         } else {//已绑定sim卡  进行解绑操作
-            SPTool.putSring(this, MyConstants.SIMNUM, "");
+            SPTool.putString(this, MyConstants.SIMNUM, "");
             Drawable drawable= getResources().getDrawable(R.drawable.unlock);
             drawable.setBounds(0, 0, bt_bindsim.getMinimumHeight(), bt_bindsim.getMinimumHeight());
             bt_bindsim.setCompoundDrawables(null,null,drawable,null);
@@ -71,7 +71,7 @@ public class Setup2Activity extends BaseSetupActivity {
 
     @Override
     public void next(View view) {
-        String simnum = SPTool.getSring(this, MyConstants.SIMNUM, "");
+        String simnum = SPTool.getString(this, MyConstants.SIMNUM, "");
         Log.d(MyConstants.TAG, "simnum: " + simnum);
         if (TextUtils.isEmpty(simnum)) {
             Toast.makeText(Setup2Activity.this, "未绑定SIM卡,请先绑定SIM卡!", Toast.LENGTH_SHORT).show();

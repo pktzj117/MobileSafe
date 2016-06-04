@@ -22,7 +22,14 @@
     <org.pktzj.mobilesafe.view.SettingCenterItemView
         android:id="@+id/SettingCenterItemView_blacknum"
         pktzj:itemtitle="黑名单拦截设置"
-        pktzj:itemcontent="黑名单拦截设置已经关闭-黑名单拦截设置已经打开"
+        pktzj:itemcontent="黑名单拦截已经关闭-黑名单拦截已经打开"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </org.pktzj.mobilesafe.view.SettingCenterItemView>
+    <org.pktzj.mobilesafe.view.SettingCenterItemView
+        android:id="@+id/SettingCenterItemView_phonelocation"
+        pktzj:itemtitle="来电归属地设置"
+        pktzj:itemcontent="来电归属地已经关闭-来电归属地已经打开"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </org.pktzj.mobilesafe.view.SettingCenterItemView>

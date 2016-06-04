@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:background="@drawable/bt_selector_blue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_icon_apkmanager"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+    <TextView
+        android:id="@+id/tv_apkname_apkmanager"
+        android:text="手机卫士"
+        android:textSize="14sp"
+        android:layout_toRightOf="@+id/iv_icon_apkmanager"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp" />
+    <TextView
+        android:id="@+id/tv_apkloca_apkmanager"
+        android:text="手机卫士"
+        android:textSize="10sp"
+        android:layout_toRightOf="@+id/iv_icon_apkmanager"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_apkname_apkmanager"
+        android:layout_below="@+id/tv_apkname_apkmanager"
+        android:layout_marginTop="10dp" />
+    <TextView
+        android:text="手机卫士"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:id="@+id/tv_apksize_apkmanger"
+        android:layout_centerInParent="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
