@@ -43,7 +43,7 @@ public class APPMangerEngine {
             if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == ApplicationInfo.FLAG_SYSTEM) {
                 appBean.setROMAPP(true);
                 appBean.setSDAPP(false);
-            } else if ((applicationInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) == ApplicationInfo.FLAG_EXTERNAL_STORAGE) {
+            } else{
                 appBean.setSDAPP(true);
                 appBean.setROMAPP(false);
             }

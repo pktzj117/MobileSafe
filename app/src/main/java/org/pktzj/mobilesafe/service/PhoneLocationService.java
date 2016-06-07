@@ -91,9 +91,6 @@ public class PhoneLocationService extends Service {
         mParams.x = 0;
         mParams.y = 0;
         mParams.setTitle("Toast");
-
-
-
     }
     private void showLocationToast(String incomingNumber) {
 

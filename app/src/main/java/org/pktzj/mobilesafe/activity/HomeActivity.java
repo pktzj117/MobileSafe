@@ -128,6 +128,7 @@ public class HomeActivity extends Activity {
                     startActivity(APPManagerActivity.class);
                     break;
                 case 3://"进程管理":
+                    startActivity(TaskManagerActivity.class);
                     break;
                 case 4://"流量统计":
                     break;

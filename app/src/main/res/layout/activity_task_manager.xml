@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_appmanager"
+    android:id="@+id/activity_task_manager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="org.pktzj.mobilesafe.activity.APPManagerActivity">
+    tools:context="org.pktzj.mobilesafe.activity.TaskManagerActivity">
 
     <TextView
         style="@style/tv_title"
-        android:text="软件管家" />
+        android:text="进程管理" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,18 +18,18 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_sdcardsize_appmanager"
+            android:id="@+id/tv_tasknum_taskmanager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:gravity="left" />
 
         <TextView
-            android:id="@+id/tv_romsize_appmanager"
+            android:id="@+id/tv_memsize_taskmanager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:gravity="right" />
 
     </LinearLayout>
 
@@ -43,23 +44,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_title_appmanger"
-                android:clickable="true"
+                android:id="@+id/tv_title_taskmanger"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ff888888"
-                android:text="用户软件"
+                android:clickable="true"
+                android:text="用户应用"
                 android:textColor="#ffffffff" />
 
             <ListView
-                android:id="@+id/lv_appmanager"
+                android:id="@+id/lv_taskmanager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone" />
         </LinearLayout>
 
         <ProgressBar
-            android:id="@+id/pb_appmanager"
+            android:id="@+id/pb_taskmanager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

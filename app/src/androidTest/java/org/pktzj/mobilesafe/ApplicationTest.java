@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.telephony.SmsManager;
 import android.test.ApplicationTestCase;
+import android.text.format.Formatter;
 import android.util.Log;
 
 import org.pktzj.mobilesafe.dao.BlackDAO;
@@ -13,12 +14,12 @@ import org.pktzj.mobilesafe.domain.BlackBean;
 import org.pktzj.mobilesafe.domain.ContactBean;
 import org.pktzj.mobilesafe.engine.APPMangerEngine;
 import org.pktzj.mobilesafe.engine.PhoneLocationEngine;
+import org.pktzj.mobilesafe.engine.TaskManagerEngine;
 import org.pktzj.mobilesafe.engine.readContactEngine;
 import org.pktzj.mobilesafe.service.LostFindService;
 import org.pktzj.mobilesafe.utils.MyConstants;
 import org.pktzj.mobilesafe.utils.SPTool;
 import org.pktzj.mobilesafe.utils.ServiceUtils;
-
 import java.util.List;
 
 /**
@@ -119,6 +120,15 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         for (APPBean appBean : allAPK) {
             Log.d("APP", appBean.toString());
         }
+    }
+
+    public void testgetAllMemSize() {
+        long totalMemSize = TaskManagerEngine.getTotalMemSize(getContext());
+        Log.d("allMemSize", Formatter.formatFileSize(getContext(),totalMemSize));
+    }
+    public void testgetAvailMemSize() {
+        long totalMemSize = TaskManagerEngine.getAvailMemSize(getContext());
+        Log.d("AvailMemSize", Formatter.formatFileSize(getContext(),totalMemSize));
     }
 
 }
