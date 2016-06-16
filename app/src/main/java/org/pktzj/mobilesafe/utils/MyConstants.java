@@ -29,4 +29,6 @@ public interface MyConstants {
     String TOASTX = "toastx";
     String TOASTY = "toasty";
 
+    String SHOWSYSAPP = "showsysapp";  //进程管理中是否显示系统进程
+
 }

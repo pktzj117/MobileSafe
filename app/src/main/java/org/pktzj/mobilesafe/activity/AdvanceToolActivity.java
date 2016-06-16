@@ -2,6 +2,7 @@ package org.pktzj.mobilesafe.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ public class AdvanceToolActivity extends Activity {
     private TextView tv_smsback;
     private ProgressDialog pb_backsms;
     private TextView tv_smsresu;
+    private TextView tv_applock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +90,13 @@ public class AdvanceToolActivity extends Activity {
                 });
             }
         });
-
+        tv_applock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdvanceToolActivity.this, AppLockActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -101,7 +109,7 @@ public class AdvanceToolActivity extends Activity {
         tv_location = (TextView) findViewById(R.id.tv_location_advancetool);
         tv_smsback = (TextView) findViewById(R.id.tv_smsback);
         tv_smsresu = (TextView) findViewById(R.id.tv_smsresu);
-
+        tv_applock = (TextView) findViewById(R.id.tv_applock);
         pb_backsms = new ProgressDialog(this);
     }
 }

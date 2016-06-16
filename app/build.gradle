@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         applicationId "org.pktzj.mobilesafe"
@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "测试版1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,8 +27,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/gson-2.3.1.jar')
-    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'org.xutils:xutils:3.3.34'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.0.0-beta1'
 }

@@ -4,12 +4,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@drawable/bt_selector_blue">
+    android:background="@drawable/bt_selector_blue"
+   >
 
     <ImageView
         android:id="@+id/iv_icon_taskmanager"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:clickable="false"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
@@ -43,5 +45,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
         android:layout_marginRight="10dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:textColor="@android:color/black" />
 </RelativeLayout>

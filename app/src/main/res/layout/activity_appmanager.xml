@@ -44,7 +44,7 @@
 
             <TextView
                 android:id="@+id/tv_title_appmanger"
-                android:clickable="true"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ff888888"

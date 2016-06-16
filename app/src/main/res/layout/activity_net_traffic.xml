@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_net_traffic"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.pktzj.mobilesafe.activity.NetTrafficActivity">
+
+    <TextView
+        style="@style/tv_title"
+        android:text="流量统计" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:visibility="invisible"
+            android:id="@+id/lv_nettraffic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+        <ProgressBar
+            android:id="@+id/pb_nettraffic"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+</LinearLayout>

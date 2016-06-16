@@ -131,10 +131,13 @@ public class HomeActivity extends Activity {
                     startActivity(TaskManagerActivity.class);
                     break;
                 case 4://"流量统计":
+                    startActivity(NetTrafficActivity.class);
                     break;
                 case 5://"病毒查杀":
+                    startActivity(AntivirusActivity.class);
                     break;
                 case 6://"缓存清除":
+                    startActivity(CleanCacheActivity.class);
                     break;
                 case 7://"高级工具":
                     startActivity(AdvanceToolActivity.class);

@@ -47,6 +47,8 @@ public class APPMangerEngine {
                 appBean.setSDAPP(true);
                 appBean.setROMAPP(false);
             }
+            appBean.setUid(String.valueOf(applicationInfo.uid));
+            appBean.setPath(applicationInfo.sourceDir);
             appBean.setIcon(applicationInfo.loadIcon(packageManager));
             appBean.setAppName(applicationInfo.loadLabel(packageManager).toString());
             appBean.setPackName(applicationInfo.packageName.toString());

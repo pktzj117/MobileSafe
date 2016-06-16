@@ -8,8 +8,8 @@
     <ImageView
         android:id="@+id/iv_icon"
         android:src="@drawable/app"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
     <TextView
         android:id="@+id/tv_name"
         android:text="进程管理"

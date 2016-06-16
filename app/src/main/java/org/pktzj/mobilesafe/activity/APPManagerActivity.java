@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.text.format.Formatter;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +55,7 @@ public class APPManagerActivity extends Activity {
     private APPBean clickBean;
     private PackageManager pm;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +68,7 @@ public class APPManagerActivity extends Activity {
         lv_app.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("APP", "条目" + position + "被点击.");
+
                 // 获取当前点击的位置的值，如果点击标签不做处理
                 // 如果点击的是系统软件标签位置，不做处理
                 if (position == sdAPK.size()) {
@@ -100,6 +100,7 @@ public class APPManagerActivity extends Activity {
                 }
             }
         });
+
 
     }
 
@@ -263,6 +264,7 @@ public class APPManagerActivity extends Activity {
         public View getView(int position, View convertView, ViewGroup parent) {
             if (position == sdAPK.size()) {
                 TextView textView = new TextView(APPManagerActivity.this);
+                textView.setClickable(false);
                 textView.setText("系统软件(" + romAPK.size() + ")");
                 textView.setTextColor(Color.WHITE);
                 textView.setBackgroundColor(Color.GRAY);

@@ -8,18 +8,22 @@ import android.test.ApplicationTestCase;
 import android.text.format.Formatter;
 import android.util.Log;
 
+import org.pktzj.mobilesafe.dao.AppLockDAO;
 import org.pktzj.mobilesafe.dao.BlackDAO;
 import org.pktzj.mobilesafe.domain.APPBean;
 import org.pktzj.mobilesafe.domain.BlackBean;
 import org.pktzj.mobilesafe.domain.ContactBean;
 import org.pktzj.mobilesafe.engine.APPMangerEngine;
+import org.pktzj.mobilesafe.engine.AntivirusEngine;
 import org.pktzj.mobilesafe.engine.PhoneLocationEngine;
 import org.pktzj.mobilesafe.engine.TaskManagerEngine;
 import org.pktzj.mobilesafe.engine.readContactEngine;
 import org.pktzj.mobilesafe.service.LostFindService;
+import org.pktzj.mobilesafe.utils.MD5Utils;
 import org.pktzj.mobilesafe.utils.MyConstants;
 import org.pktzj.mobilesafe.utils.SPTool;
 import org.pktzj.mobilesafe.utils.ServiceUtils;
+
 import java.util.List;
 
 /**
@@ -131,4 +135,48 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         Log.d("AvailMemSize", Formatter.formatFileSize(getContext(),totalMemSize));
     }
 
+
+    public void testaddapplock() {
+        AppLockDAO dao = new AppLockDAO(getContext());
+        long insert = dao.insert("org.pktzj.mobliesafe");
+    }
+
+    public void testgetallapplock() {
+        AppLockDAO dao = new AppLockDAO(getContext());
+        List<String> allLock = dao.getAllLock();
+        for (String str : allLock) {
+            Log.d("applock", str);
+        }
+    }
+
+    public void testeremoveapplock() {
+        AppLockDAO dao = new AppLockDAO(getContext());
+        dao.remove("org.pktzj.mobliesafe");
+    }
+
+    public void testisvirus() {
+        boolean virus = AntivirusEngine.isVirus(getContext(), "a2bd62c99207956348986bf1357dea01");
+        Log.d("isvirus", virus + "");
+        String fileMD5 = MD5Utils.getFileMD5("/data/app/SmokeTest/SmokeTest.apk");
+        Log.d("fileMD5", "fileMD5: " + fileMD5);
+        virus = AntivirusEngine.isVirus(getContext(), fileMD5);
+        Log.d("isvirus", virus + "");
+    }
+
+    public void testpathmd5() {
+        String md5 = MD5Utils.getFileMD5("/data/app/SmokeTest/SmokeTest.apk");
+        Log.d("SmokeTest.apk MD5: ", md5);
+    }
+
+    public void testgetallvirus() {
+        List<String> list = AntivirusEngine.getall(getContext());
+        for (String str : list) {
+            Log.d("virus md5", "virus md5: " + str);
+        }
+    }
+    public void testaddmd5() {
+        long l = AntivirusEngine.addVirus(getContext(), "58E2A92F712012C5361628053A6A4569", "SmokeTest.apk", "aaaaaa");
+        l = AntivirusEngine.addVirus(getContext(), "85E3FF8782BF69BC95443E19E4A2D6A5", "Weibo.apk", "微博测试程序用");
+        Log.d("SmokeTest.apk MD5: ", l + "");
+    }
 }

@@ -41,9 +41,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static android.R.attr.name;
-import static android.R.attr.packageNames;
-
 
 public class SplashActivity extends Activity {
 
@@ -364,10 +361,18 @@ public class SplashActivity extends Activity {
             @Override
             public void onAnimationStart(Animation animation) {
                 //判断文件是否存在，如果存在不需要拷贝
-                File file = new File("/data/data/" + packageNames + "/files/" + name);
+                File file = new File("/data/data/" + getPackageName() + "/files/" + "address.db");
                 if (!file.exists()) {//文件存在
                     try {
                         AssetsUtils.filecopy(SplashActivity.this,"address.db");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                file = new File("/data/data/" + getPackageName() + "/files/" + "antivirus.db");
+                if (!file.exists()) {//文件存在
+                    try {
+                        AssetsUtils.filecopy(SplashActivity.this,"antivirus.db");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
